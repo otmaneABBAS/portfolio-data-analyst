@@ -23,3 +23,10 @@ where code_departement='69' and sp95_prix is not null
 select adresse,sp95_prix,ville,latitude,longitude,code_departement from `fr_carburant.fr_carburant`
 where code_departement='69' and sp95_prix is not null   order by sp95_prix asc   
 
+# calculer la distance entre chaque station et chez moi
+select adresse,sp95_prix,ville,latitude,longitude,ST_DISTANCE(
+  ST_GEOGPOINT(longitude,latitude ),
+  ST_GEOGPOINT(4.8119423, 45.7801385)
+)/1000 AS distance_km,code_departement from `fr_carburant.fr_carburant`
+where code_departement='69' and sp95_prix is not null
+
